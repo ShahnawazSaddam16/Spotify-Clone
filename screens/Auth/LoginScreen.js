@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -19,100 +19,129 @@ import {
   TEXT_PRIMARY,
   TEXT_SECONDARY,
 } from "../../theme/theme";
+import LoadingDots from "../../theme/LoadingDots";
 
 export default function LoginScreen() {
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [loadingType, setLoadingType] = useState("");
 
-    const [input, setInput] = useState("");
-  
-    const [message, setMessage] = useState("");
-  
-    const navigation = useNavigation();
-    const EmailAlpahabets = ["@", ".", "com"];
-  
-    const Login = () => {
-      if (
-        input.length === 0 ||
-        !EmailAlpahabets.every((item) => input.includes(item))
-      ) {
-        setMessage("Please enter valid email");
-  
-        setTimeout(() => {
-          setMessage("");
-        }, 3000);
-      } else{
-          navigation.navigate("WelcomeScreen")
-      }
-    };
+  const navigation = useNavigation();
+  const EmailAlpahabets = ["@", ".", "com"];
+
+  const startLoading = (type) => {
+    setLoadingType(type);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      setLoadingType("");
+      navigation.navigate("WelcomeScreen");
+    }, 4500);
+  };
+
+  const Login = () => {
+    if (
+      input.length === 0 ||
+      !EmailAlpahabets.every((item) => input.includes(item))
+    ) {
+      setMessage("Please enter valid email");
+
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+    } else {
+      startLoading("email");
+    }
+  };
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
+    <>
+      <View style={styles.container}>
+        <StatusBar style="light" />
 
-      <View style={styles.topBar}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.navigate("WelcomeScreen")}
-        >
-          <Ionicons name="arrow-back" size={28} color="#fff" />
-        </TouchableOpacity>
+        <View style={styles.topBar}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.navigate("WelcomeScreen")}
+          >
+            <Ionicons name="arrow-back" size={28} color="#fff" />
+          </TouchableOpacity>
 
-        <Text style={styles.topBarText}>Log in to Spotify</Text>
+          <Text style={styles.topBarText}>Log in to Spotify</Text>
 
-        <View style={styles.placeholder} />
+          <View style={styles.placeholder} />
+        </View>
+
+        <View style={styles.content}>
+          <Text style={styles.label}>Email</Text>
+
+          <TextInput
+            style={styles.input}
+            value={input}
+            onChangeText={(text) => setInput(text)}
+            placeholderTextColor="#B3B3B3"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoComplete="email"
+            textContentType="emailAddress"
+            selectionColor="#1ED760"
+          />
+
+          <Text style={styles.Message}>{message}</Text>
+
+          <TouchableOpacity style={styles.continueButton} onPress={Login}>
+            <Text style={styles.continueText}>Continue</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.orText}>Or log in with</Text>
+
+          <TouchableOpacity
+            style={styles.socialButton}
+            onPress={() => startLoading("google")}
+          >
+            <View style={styles.socialLeft}>
+              <FontAwesome name="google" size={22} color="#EA4335" />
+            </View>
+            <Text style={styles.socialText}>Google</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.socialButton}
+            onPress={() => startLoading("facebook")}
+          >
+            <View style={styles.socialLeft}>
+              <FontAwesome name="facebook-official" size={22} color="#1877F2" />
+            </View>
+            <Text style={styles.socialText}>Facebook</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Don't have an account?</Text>
+
+          <TouchableOpacity onPress={() => navigation.navigate("SignInScreen")}>
+            <Text style={styles.signUpText}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      <View style={styles.content}>
-        <Text style={styles.label}>Email</Text>
-
-        <TextInput
-          style={styles.input}
-          placeholder=""
-          value={input}
-          onChangeText={(text) => {
-            setInput(text);
+      {loading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
           }}
-          placeholderTextColor="#B3B3B3"
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          autoComplete="email"
-          textContentType="emailAddress"
-          selectionColor="#1ED760"
-        />
-
-        <Text style={styles.Message}>{message}</Text>
-
-        <TouchableOpacity style={styles.continueButton} onPress={()=>{Login()}}>
-          <Text style={styles.continueText}>Continue</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.orText}>Or log in with</Text>
-
-        <TouchableOpacity style={styles.socialButton}
-        onPress={()=>{navigation.navigate("WelcomeScreen")}}>
-          <View style={styles.socialLeft}>
-            <FontAwesome name="google" size={22} color="#EA4335" />
-          </View>
-          <Text style={styles.socialText}>Google</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.socialButton} 
-        onPress={()=>{navigation.navigate("WelcomeScreen")}}>
-          <View style={styles.socialLeft}>
-            <FontAwesome name="facebook-official" size={22} color="#1877F2" />
-          </View>
-          <Text style={styles.socialText}>Facebook</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Don't have an account?</Text>
-
-        <TouchableOpacity onPress={()=>{navigation.navigate("SignInScreen")}}>
-          <Text style={styles.signUpText}>Sign up</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+        >
+          <LoadingDots />
+        </View>
+      )}
+    </>
   );
 }
 
@@ -236,7 +265,7 @@ const styles = StyleSheet.create({
   },
 
   Message: {
-  marginTop: 3,
-  color: "red",
+    marginTop: 3,
+    color: "red",
   },
 });
