@@ -24,13 +24,26 @@ import {
   TEXT_SECONDARY,
 } from "../../theme/theme";
 
+import LoadingDots from "../../theme/LoadingDots";
+
 export default function SignInScreen() {
   const [input, setInput] = useState("");
 
   const [message, setMessage] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigation();
   const EmailAlpahabets = ["@", ".", "com"];
+
+  const startLoading = () => {
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      navigation.navigate("WelcomeScreen");
+    }, 4500);
+  };
 
   const SignIn = () => {
     if (
@@ -42,86 +55,104 @@ export default function SignInScreen() {
       setTimeout(() => {
         setMessage("");
       }, 3000);
-    } else{
-        navigation.navigate("WelcomeScreen")
+    } else {
+      startLoading();
     }
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
+    <>
+      <View style={styles.container}>
+        <StatusBar style="light" />
 
-      <View style={styles.topBar}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.navigate("WelcomeScreen")}
-        >
-          <Ionicons name="arrow-back" size={28} color="#fff" />
-        </TouchableOpacity>
+        <View style={styles.topBar}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => navigation.navigate("WelcomeScreen")}
+          >
+            <Ionicons name="arrow-back" size={28} color="#fff" />
+          </TouchableOpacity>
 
-        <Text style={styles.topBarText}>Signup to start listening</Text>
+          <Text style={styles.topBarText}>Signup to start listening</Text>
 
-        <View style={styles.placeholder} />
-      </View>
+          <View style={styles.placeholder} />
+        </View>
 
-      <View style={styles.content}>
-        <Text style={styles.heading}>What's your email address?</Text>
+        <View style={styles.content}>
+          <Text style={styles.heading}>What's your email address?</Text>
 
-        <Text style={styles.subHeading}>
-          You'll need to confirm this email later.
-        </Text>
+          <Text style={styles.subHeading}>
+            You'll need to confirm this email later.
+          </Text>
 
-        <TextInput
-          style={styles.input}
-          value={input}
-          onChangeText={(text) => {
-            setInput(text);
-          }}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          placeholderTextColor="#B3B3B3"
-          selectionColor="#1ED760"
-        />
-
-        <Text style={styles.Message}>{message}</Text>
-
-        <TouchableOpacity
-          style={styles.continueButton}
-          onPress={() => {
-            SignIn();
-          }}
-        >
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </TouchableOpacity>
-
-        <Text style={styles.orText}>Or sign up with</Text>
-
-        <TouchableOpacity style={styles.socialButton} 
-        onPress={()=>{navigation.navigate("WelcomeScreen")}}>
-          <FontAwesome
-            name="google"
-            size={22}
-            color="#EA4335"
-            style={styles.socialIcon}
+          <TextInput
+            style={styles.input}
+            value={input}
+            onChangeText={(text) => {
+              setInput(text);
+            }}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            placeholderTextColor="#B3B3B3"
+            selectionColor="#1ED760"
           />
 
-          <Text style={styles.socialText}>Google</Text>
-        </TouchableOpacity>
+          <Text style={styles.Message}>{message}</Text>
+
+          <TouchableOpacity
+            style={styles.continueButton}
+            onPress={() => {
+              SignIn();
+            }}
+          >
+            <Text style={styles.continueButtonText}>Continue</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.orText}>Or sign up with</Text>
+
+          <TouchableOpacity
+            style={styles.socialButton}
+            onPress={() => startLoading()}
+          >
+            <FontAwesome
+              name="google"
+              size={22}
+              color="#EA4335"
+              style={styles.socialIcon}
+            />
+
+            <Text style={styles.socialText}>Google</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Already have an account?</Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("LoginScreen");
+            }}
+          >
+            <Text style={styles.footerLink}>Log in</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Already have an account?</Text>
-
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("LoginScreen");
+      {loading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
           }}
         >
-          <Text style={styles.footerLink}>Log in</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <LoadingDots />
+        </View>
+      )}
+    </>
   );
 }
 
