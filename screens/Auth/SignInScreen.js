@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   heading: {
     color: TEXT_PRIMARY,
 
-    fontSize: 34,
+    fontSize: 25,
 
     fontWeight: "bold",
 
@@ -214,15 +214,10 @@ const styles = StyleSheet.create({
 
   continueButton: {
     marginTop: 18,
-
     backgroundColor: BTN_PRIMARY_BG,
-
     height: 56,
-
     borderRadius: 30,
-
     justifyContent: "center",
-
     alignItems: "center",
   },
 
@@ -285,7 +280,7 @@ const styles = StyleSheet.create({
   footer: {
     alignItems: "center",
 
-    paddingBottom: 40,
+    paddingBottom: 80,
   },
 
   footerText: {
