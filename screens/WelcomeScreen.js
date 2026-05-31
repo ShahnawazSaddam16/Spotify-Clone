@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native"
 import {
   BORDER_COLOR,
   BTN_PRIMARY_BG,
@@ -14,6 +15,8 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 
 export default function WelcomeScreen() {
+    const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.iconBox}>
@@ -24,11 +27,13 @@ export default function WelcomeScreen() {
       <Text style={styles.title}>Free on Spotify.</Text>
 
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.signupBtn}>
-          <Text style={styles.signupText}>Sign up for Free</Text>
+        <TouchableOpacity style={styles.signupBtn} 
+        onPress={()=>{navigation.navigate("SignInScreen")}}>
+        <Text style={styles.signupText}>Sign up for Free</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn}
+        onPress={()=>{navigation.navigate("LoginScreen")}}>
           <Text style={styles.loginText}>Log in</Text>
         </TouchableOpacity>
       </View>
