@@ -128,19 +128,14 @@ export default function SignInScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: PRIMARY_COLOR,
   },
 
   topBar: {
     flexDirection: "row",
-
     alignItems: "center",
-
     justifyContent: "space-between",
-
     paddingTop: 60,
-
     paddingHorizontal: 16,
   },
 
@@ -150,13 +145,9 @@ const styles = StyleSheet.create({
 
   topBarText: {
     flex: 1,
-
     textAlign: "center",
-
     color: TEXT_PRIMARY,
-
     fontSize: 18,
-
     fontWeight: "700",
   },
 
@@ -166,49 +157,33 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 1,
-
     justifyContent: "center",
-
     paddingHorizontal: 16,
-
     marginTop: -60,
   },
 
   heading: {
     color: TEXT_PRIMARY,
-
     fontSize: 25,
-
     fontWeight: "bold",
-
     lineHeight: 40,
   },
 
   subHeading: {
     color: TEXT_SECONDARY,
-
     fontSize: 16,
-
     marginTop: 8,
-
     marginBottom: 20,
   },
 
   input: {
     height: 58,
-
     borderWidth: 1,
-
     borderColor: BORDER_COLOR,
-
     borderRadius: 4,
-
     backgroundColor: SECONDARY_COLOR,
-
     color: TEXT_PRIMARY,
-
     fontSize: 16,
-
     paddingHorizontal: 16,
   },
 
@@ -223,85 +198,61 @@ const styles = StyleSheet.create({
 
   continueButtonText: {
     color: BTN_PRIMARY_TEXT,
-
     fontSize: 16,
-
     fontWeight: "700",
   },
 
   orText: {
     textAlign: "center",
-
     color: TEXT_PRIMARY,
-
     fontSize: 16,
-
     fontWeight: "700",
-
     marginTop: 30,
-
     marginBottom: 20,
   },
 
   socialButton: {
     height: 56,
-
     borderWidth: 1,
-
     borderColor: BORDER_COLOR,
-
     borderRadius: 30,
-
     flexDirection: "row",
-
     alignItems: "center",
-
     paddingHorizontal: 20,
   },
 
   socialIcon: {
     position: "absolute",
-
     left: 20,
   },
 
   socialText: {
     flex: 1,
-
     textAlign: "center",
-
     color: TEXT_PRIMARY,
-
     fontSize: 16,
-
     fontWeight: "700",
   },
 
   footer: {
     alignItems: "center",
-
     paddingBottom: 80,
   },
 
   footerText: {
     color: TEXT_SECONDARY,
-
     fontSize: 15,
   },
 
   footerLink: {
     color: TEXT_PRIMARY,
-
     fontSize: 18,
-
     fontWeight: "700",
-
     marginTop: 10,
   },
 
   Message: {
     marginTop: 3,
-
     color: "red",
   },
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -21,7 +21,28 @@ import {
 } from "../../theme/theme";
 
 export default function LoginScreen() {
-  const navigation = useNavigation();
+
+    const [input, setInput] = useState("");
+  
+    const [message, setMessage] = useState("");
+  
+    const navigation = useNavigation();
+    const EmailAlpahabets = ["@", ".", "com"];
+  
+    const Login = () => {
+      if (
+        input.length === 0 ||
+        !EmailAlpahabets.every((item) => input.includes(item))
+      ) {
+        setMessage("Please enter valid email");
+  
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+      } else{
+          navigation.navigate("WelcomeScreen")
+      }
+    };
 
   return (
     <View style={styles.container}>
@@ -46,6 +67,10 @@ export default function LoginScreen() {
         <TextInput
           style={styles.input}
           placeholder=""
+          value={input}
+          onChangeText={(text) => {
+            setInput(text);
+          }}
           placeholderTextColor="#B3B3B3"
           keyboardType="email-address"
           autoCapitalize="none"
@@ -55,20 +80,24 @@ export default function LoginScreen() {
           selectionColor="#1ED760"
         />
 
-        <TouchableOpacity style={styles.continueButton}>
+        <Text style={styles.Message}>{message}</Text>
+
+        <TouchableOpacity style={styles.continueButton} onPress={()=>{Login()}}>
           <Text style={styles.continueText}>Continue</Text>
         </TouchableOpacity>
 
         <Text style={styles.orText}>Or log in with</Text>
 
-        <TouchableOpacity style={styles.socialButton}>
+        <TouchableOpacity style={styles.socialButton}
+        onPress={()=>{navigation.navigate("WelcomeScreen")}}>
           <View style={styles.socialLeft}>
             <FontAwesome name="google" size={22} color="#EA4335" />
           </View>
           <Text style={styles.socialText}>Google</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.socialButton}>
+        <TouchableOpacity style={styles.socialButton} 
+        onPress={()=>{navigation.navigate("WelcomeScreen")}}>
           <View style={styles.socialLeft}>
             <FontAwesome name="facebook-official" size={22} color="#1877F2" />
           </View>
@@ -191,7 +220,7 @@ const styles = StyleSheet.create({
 
   footer: {
     alignItems: "center",
-    paddingBottom: 40,
+    paddingBottom: 80,
   },
 
   footerText: {
@@ -204,5 +233,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "700",
     marginTop: 8,
+  },
+
+  Message: {
+  marginTop: 3,
+  color: "red",
   },
 });
