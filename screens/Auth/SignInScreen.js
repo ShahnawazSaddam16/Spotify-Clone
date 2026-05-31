@@ -1,9 +1,23 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { PRIMARY_COLOR } from "../../theme/theme";
+import {
+  BORDER_COLOR,
+  BTN_PRIMARY_BG,
+  BTN_PRIMARY_TEXT,
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  TEXT_PRIMARY,
+  TEXT_SECONDARY,
+} from "../../theme/theme";
 
 export default function SignInScreen() {
   const navigation = useNavigation();
@@ -21,14 +35,62 @@ export default function SignInScreen() {
         </TouchableOpacity>
 
         <Text style={styles.topBarText}>
-          Sign up to start listening
+          Signup to start listening
         </Text>
 
         <View style={styles.placeholder} />
       </View>
 
-      {/* SignIn Container */}
-      
+      <View style={styles.content}>
+        <Text style={styles.heading}>
+          What's your email address?
+        </Text>
+
+        <Text style={styles.subHeading}>
+          You'll need to confirm this email later.
+        </Text>
+
+        <TextInput
+          style={styles.input}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholderTextColor="#B3B3B3"
+          selectionColor="#1ED760"
+        />
+
+        <TouchableOpacity style={styles.continueButton}>
+          <Text style={styles.continueButtonText}>
+            Continue
+          </Text>
+        </TouchableOpacity>
+
+        <Text style={styles.orText}>
+          Or sign up with
+        </Text>
+
+        <TouchableOpacity style={styles.socialButton}>
+          <FontAwesome
+            name="google"
+            size={22}
+            color="#EA4335"
+            style={styles.socialIcon}
+          />
+          <Text style={styles.socialText}>Google</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>
+          Already have an account?
+        </Text>
+
+        <TouchableOpacity onPress={()=>{navigation.navigate("LoginScreen")}}>
+          <Text style={styles.footerLink}>
+            Log in
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -43,9 +105,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
     paddingTop: 60,
-    paddingBottom: 20,
+    paddingHorizontal: 16,
   },
 
   backButton: {
@@ -53,11 +114,11 @@ const styles = StyleSheet.create({
   },
 
   topBarText: {
-    color: "#FFFFFF",
+    flex: 1,
+    textAlign: "center",
+    color: TEXT_PRIMARY,
     fontSize: 18,
     fontWeight: "700",
-    textAlign: "center",
-    flex: 1,
   },
 
   placeholder: {
@@ -67,13 +128,96 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: 30,
+    paddingHorizontal: 16,
+    marginTop: -60,
   },
 
   heading: {
-    color: "#FFFFFF",
-    fontSize: 42,
+    color: TEXT_PRIMARY,
+    fontSize: 34,
     fontWeight: "bold",
-    lineHeight: 50,
+    lineHeight: 40,
+  },
+
+  subHeading: {
+    color: TEXT_SECONDARY,
+    fontSize: 16,
+    marginTop: 8,
+    marginBottom: 20,
+  },
+
+  input: {
+    height: 58,
+    borderWidth: 1,
+    borderColor: BORDER_COLOR,
+    borderRadius: 4,
+    backgroundColor: SECONDARY_COLOR,
+    color: TEXT_PRIMARY,
+    fontSize: 16,
+    paddingHorizontal: 16,
+  },
+
+  continueButton: {
+    marginTop: 18,
+    backgroundColor: BTN_PRIMARY_BG,
+    height: 56,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  continueButtonText: {
+    color: BTN_PRIMARY_TEXT,
+    fontSize: 16,
+    fontWeight: "700",
+  },
+
+  orText: {
+    textAlign: "center",
+    color: TEXT_PRIMARY,
+    fontSize: 16,
+    fontWeight: "700",
+    marginTop: 30,
+    marginBottom: 20,
+  },
+
+  socialButton: {
+    height: 56,
+    borderWidth: 1,
+    borderColor: BORDER_COLOR,
+    borderRadius: 30,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+
+  socialIcon: {
+    position: "absolute",
+    left: 20,
+  },
+
+  socialText: {
+    flex: 1,
+    textAlign: "center",
+    color: TEXT_PRIMARY,
+    fontSize: 16,
+    fontWeight: "700",
+  },
+
+  footer: {
+    alignItems: "center",
+    paddingBottom: 40,
+  },
+
+  footerText: {
+    color: TEXT_SECONDARY,
+    fontSize: 15,
+  },
+
+  footerLink: {
+    color: TEXT_PRIMARY,
+    fontSize: 18,
+    fontWeight: "700",
+    marginTop: 10,
   },
 });

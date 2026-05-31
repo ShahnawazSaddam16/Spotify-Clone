@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import WelcomeScreen from './screens/WelcomeScreen';
 import SignInScreen from './screens/Auth/SignInScreen';
+import LoginScreen from './screens/Auth/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="SignInScreen" component={SignInScreen} />
+          <Stack.Screen name="LoginScreen"component={LoginScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
