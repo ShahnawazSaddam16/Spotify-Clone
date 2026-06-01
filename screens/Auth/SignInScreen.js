@@ -38,7 +38,7 @@ export default function SignInScreen() {
 
     setTimeout(() => {
       setLoading(false);
-      navigation.navigate("WelcomeScreen");
+      navigation.navigate("HomeScreen");
     }, 4500);
   };
 

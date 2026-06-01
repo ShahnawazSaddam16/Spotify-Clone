@@ -36,7 +36,7 @@ export default function LoginScreen() {
     setTimeout(() => {
       setLoading(false);
       setLoadingType("");
-      navigation.navigate("WelcomeScreen");
+      navigation.navigate("HomeScreen");
     }, 4500);
   };
 
