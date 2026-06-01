@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { PRIMARY_COLOR } from "../theme/theme";
 import BottomBar from "../components/BottomBar";
 import TopBar from "../components/HomeComponents/TopBar";
+import Playlists from "../components/HomeComponents/Playlists";
 
 export default function HomeScreen() {
   return (
@@ -10,8 +11,9 @@ export default function HomeScreen() {
       
       <TopBar />
 
-      <View className="flex-1 justify-center items-center">
-        <Text className="text-white">HomeScreen</Text>
+      {/* Content */}
+      <View className="flex-1">
+        <Playlists />
       </View>
 
       <BottomBar />
