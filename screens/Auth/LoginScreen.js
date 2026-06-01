@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   TextInput,
 } from "react-native";
@@ -58,27 +57,46 @@ export default function LoginScreen() {
 
   return (
     <>
-      <View style={styles.container}>
+      <View
+        className="flex-1"
+        style={{ backgroundColor: PRIMARY_COLOR }}
+      >
         <StatusBar style="light" />
 
-        <View style={styles.topBar}>
+        <View className="flex-row items-center justify-between pt-[60px] px-5">
           <TouchableOpacity
-            style={styles.backButton}
+            className="w-10"
             onPress={() => navigation.navigate("WelcomeScreen")}
           >
             <Ionicons name="arrow-back" size={28} color="#fff" />
           </TouchableOpacity>
 
-          <Text style={styles.topBarText}>Log in to Spotify</Text>
+          <Text
+            className="flex-1 text-center text-xl font-bold"
+            style={{ color: TEXT_PRIMARY }}
+          >
+            Log in to Spotify
+          </Text>
 
-          <View style={styles.placeholder} />
+          <View className="w-10" />
         </View>
 
-        <View style={styles.content}>
-          <Text style={styles.label}>Email</Text>
+        <View className="flex-1 px-5 mt-[120px]">
+          <Text
+            className="text-[22px] font-bold mb-[10px]"
+            style={{ color: TEXT_PRIMARY }}
+          >
+            Email
+          </Text>
 
           <TextInput
-            style={styles.input}
+            className="h-[55px] text-base px-[15px] rounded"
+            style={{
+              borderWidth: 1,
+              borderColor: BORDER_COLOR,
+              backgroundColor: SECONDARY_COLOR,
+              color: TEXT_PRIMARY,
+            }}
             value={input}
             onChangeText={(text) => setInput(text)}
             placeholderTextColor="#B3B3B3"
@@ -90,182 +108,101 @@ export default function LoginScreen() {
             selectionColor="#1ED760"
           />
 
-          <Text style={styles.Message}>{message}</Text>
-
-          <TouchableOpacity style={styles.continueButton} onPress={Login}>
-            <Text style={styles.continueText}>Continue</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.orText}>Or log in with</Text>
+          <Text className="mt-[3px] text-red-500">
+            {message}
+          </Text>
 
           <TouchableOpacity
-            style={styles.socialButton}
+            className="mt-[18px] h-[55px] rounded-full justify-center items-center"
+            style={{ backgroundColor: BTN_PRIMARY_BG }}
+            onPress={Login}
+          >
+            <Text
+              className="text-base font-bold"
+              style={{ color: BTN_PRIMARY_TEXT }}
+            >
+              Continue
+            </Text>
+          </TouchableOpacity>
+
+          <Text
+            className="text-center mt-[25px] mb-5 text-[15px] font-semibold"
+            style={{ color: TEXT_PRIMARY }}
+          >
+            Or log in with
+          </Text>
+
+          <TouchableOpacity
+            className="h-[55px] rounded-full flex-row items-center mb-[15px] px-5"
+            style={{
+              borderWidth: 1,
+              borderColor: BORDER_COLOR,
+            }}
             onPress={() => startLoading("google")}
           >
-            <View style={styles.socialLeft}>
+            <View className="w-[30px]">
               <FontAwesome name="google" size={22} color="#EA4335" />
             </View>
-            <Text style={styles.socialText}>Google</Text>
+
+            <Text
+              className="flex-1 text-center text-base font-semibold mr-[30px]"
+              style={{ color: TEXT_PRIMARY }}
+            >
+              Google
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.socialButton}
+            className="h-[55px] rounded-full flex-row items-center mb-[15px] px-5"
+            style={{
+              borderWidth: 1,
+              borderColor: BORDER_COLOR,
+            }}
             onPress={() => startLoading("facebook")}
           >
-            <View style={styles.socialLeft}>
-              <FontAwesome name="facebook-official" size={22} color="#1877F2" />
+            <View className="w-[30px]">
+              <FontAwesome
+                name="facebook-official"
+                size={22}
+                color="#1877F2"
+              />
             </View>
-            <Text style={styles.socialText}>Facebook</Text>
+
+            <Text
+              className="flex-1 text-center text-base font-semibold mr-[30px]"
+              style={{ color: TEXT_PRIMARY }}
+            >
+              Facebook
+            </Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Don't have an account?</Text>
+        <View className="items-center pb-20">
+          <Text
+            className="text-[15px]"
+            style={{ color: TEXT_SECONDARY }}
+          >
+            Don't have an account?
+          </Text>
 
-          <TouchableOpacity onPress={() => navigation.navigate("SignInScreen")}>
-            <Text style={styles.signUpText}>Sign up</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("SignInScreen")}
+          >
+            <Text
+              className="text-base font-bold mt-2"
+              style={{ color: TEXT_PRIMARY }}
+            >
+              Sign up
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
 
       {loading && (
-        <View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-          }}
-        >
+        <View className="absolute inset-0">
           <LoadingDots />
         </View>
       )}
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: PRIMARY_COLOR,
-  },
-
-  topBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingTop: 60,
-    paddingHorizontal: 20,
-  },
-
-  backButton: {
-    width: 40,
-  },
-
-  topBarText: {
-    flex: 1,
-    textAlign: "center",
-    color: TEXT_PRIMARY,
-    fontSize: 20,
-    fontWeight: "700",
-  },
-
-  placeholder: {
-    width: 40,
-  },
-
-  content: {
-    flex: 1,
-    paddingHorizontal: 20,
-    marginTop: 120,
-  },
-
-  label: {
-    color: TEXT_PRIMARY,
-    fontSize: 22,
-    fontWeight: "700",
-    marginBottom: 10,
-  },
-
-  input: {
-    height: 55,
-    borderWidth: 1,
-    borderColor: BORDER_COLOR,
-    borderRadius: 4,
-    backgroundColor: SECONDARY_COLOR,
-    color: TEXT_PRIMARY,
-    fontSize: 16,
-    paddingHorizontal: 15,
-  },
-
-  continueButton: {
-    marginTop: 18,
-    backgroundColor: BTN_PRIMARY_BG,
-    height: 55,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  continueText: {
-    color: BTN_PRIMARY_TEXT,
-    fontWeight: "700",
-    fontSize: 16,
-  },
-
-  orText: {
-    color: TEXT_PRIMARY,
-    textAlign: "center",
-    marginTop: 25,
-    marginBottom: 20,
-    fontSize: 15,
-    fontWeight: "600",
-  },
-
-  socialButton: {
-    height: 55,
-    borderWidth: 1,
-    borderColor: BORDER_COLOR,
-    borderRadius: 30,
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 15,
-    paddingHorizontal: 20,
-  },
-
-  socialLeft: {
-    width: 30,
-  },
-
-  socialText: {
-    flex: 1,
-    textAlign: "center",
-    color: TEXT_PRIMARY,
-    fontSize: 16,
-    fontWeight: "600",
-    marginRight: 30,
-  },
-
-  footer: {
-    alignItems: "center",
-    paddingBottom: 80,
-  },
-
-  footerText: {
-    color: TEXT_SECONDARY,
-    fontSize: 15,
-  },
-
-  signUpText: {
-    color: TEXT_PRIMARY,
-    fontSize: 16,
-    fontWeight: "700",
-    marginTop: 8,
-  },
-
-  Message: {
-    marginTop: 3,
-    color: "red",
-  },
-});

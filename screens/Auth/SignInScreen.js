@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   TextInput,
 } from "react-native";
@@ -28,9 +27,7 @@ import LoadingDots from "../../theme/LoadingDots";
 
 export default function SignInScreen() {
   const [input, setInput] = useState("");
-
   const [message, setMessage] = useState("");
-
   const [loading, setLoading] = useState(false);
 
   const navigation = useNavigation();
@@ -62,31 +59,53 @@ export default function SignInScreen() {
 
   return (
     <>
-      <View style={styles.container}>
+      <View
+        className="flex-1"
+        style={{ backgroundColor: PRIMARY_COLOR }}
+      >
         <StatusBar style="light" />
 
-        <View style={styles.topBar}>
+        <View className="flex-row items-center justify-between pt-[60px] px-4">
           <TouchableOpacity
-            style={styles.backButton}
+            className="w-10"
             onPress={() => navigation.navigate("WelcomeScreen")}
           >
             <Ionicons name="arrow-back" size={28} color="#fff" />
           </TouchableOpacity>
 
-          <Text style={styles.topBarText}>Signup to start listening</Text>
+          <Text
+            className="flex-1 text-center text-lg font-bold"
+            style={{ color: TEXT_PRIMARY }}
+          >
+            Signup to start listening
+          </Text>
 
-          <View style={styles.placeholder} />
+          <View className="w-10" />
         </View>
 
-        <View style={styles.content}>
-          <Text style={styles.heading}>What's your email address?</Text>
+        <View className="flex-1 justify-center px-4 -mt-[60px]">
+          <Text
+            className="text-[25px] font-bold leading-10"
+            style={{ color: TEXT_PRIMARY }}
+          >
+            What's your email address?
+          </Text>
 
-          <Text style={styles.subHeading}>
+          <Text
+            className="text-base mt-2 mb-5"
+            style={{ color: TEXT_SECONDARY }}
+          >
             You'll need to confirm this email later.
           </Text>
 
           <TextInput
-            style={styles.input}
+            className="h-[58px] text-base px-4 rounded"
+            style={{
+              borderWidth: 1,
+              borderColor: BORDER_COLOR,
+              backgroundColor: SECONDARY_COLOR,
+              color: TEXT_PRIMARY,
+            }}
             value={input}
             onChangeText={(text) => {
               setInput(text);
@@ -98,192 +117,87 @@ export default function SignInScreen() {
             selectionColor="#1ED760"
           />
 
-          <Text style={styles.Message}>{message}</Text>
+          <Text className="mt-[3px] text-red-500">
+            {message}
+          </Text>
 
           <TouchableOpacity
-            style={styles.continueButton}
+            className="mt-[18px] h-14 rounded-full justify-center items-center"
+            style={{ backgroundColor: BTN_PRIMARY_BG }}
             onPress={() => {
               SignIn();
             }}
           >
-            <Text style={styles.continueButtonText}>Continue</Text>
+            <Text
+              className="text-base font-bold"
+              style={{ color: BTN_PRIMARY_TEXT }}
+            >
+              Continue
+            </Text>
           </TouchableOpacity>
 
-          <Text style={styles.orText}>Or sign up with</Text>
+          <Text
+            className="text-center text-base font-bold mt-[30px] mb-5"
+            style={{ color: TEXT_PRIMARY }}
+          >
+            Or sign up with
+          </Text>
 
           <TouchableOpacity
-            style={styles.socialButton}
+            className="h-14 rounded-full flex-row items-center px-5"
+            style={{
+              borderWidth: 1,
+              borderColor: BORDER_COLOR,
+            }}
             onPress={() => startLoading()}
           >
             <FontAwesome
               name="google"
               size={22}
               color="#EA4335"
-              style={styles.socialIcon}
+              style={{
+                position: "absolute",
+                left: 20,
+              }}
             />
 
-            <Text style={styles.socialText}>Google</Text>
+            <Text
+              className="flex-1 text-center text-base font-bold"
+              style={{ color: TEXT_PRIMARY }}
+            >
+              Google
+            </Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Already have an account?</Text>
+        <View className="items-center pb-20">
+          <Text
+            className="text-[15px]"
+            style={{ color: TEXT_SECONDARY }}
+          >
+            Already have an account?
+          </Text>
 
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("LoginScreen");
             }}
           >
-            <Text style={styles.footerLink}>Log in</Text>
+            <Text
+              className="text-lg font-bold mt-[10px]"
+              style={{ color: TEXT_PRIMARY }}
+            >
+              Log in
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
 
       {loading && (
-        <View
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-          }}
-        >
+        <View className="absolute inset-0">
           <LoadingDots />
         </View>
       )}
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: PRIMARY_COLOR,
-  },
-
-  topBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingTop: 60,
-    paddingHorizontal: 16,
-  },
-
-  backButton: {
-    width: 40,
-  },
-
-  topBarText: {
-    flex: 1,
-    textAlign: "center",
-    color: TEXT_PRIMARY,
-    fontSize: 18,
-    fontWeight: "700",
-  },
-
-  placeholder: {
-    width: 40,
-  },
-
-  content: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 16,
-    marginTop: -60,
-  },
-
-  heading: {
-    color: TEXT_PRIMARY,
-    fontSize: 25,
-    fontWeight: "bold",
-    lineHeight: 40,
-  },
-
-  subHeading: {
-    color: TEXT_SECONDARY,
-    fontSize: 16,
-    marginTop: 8,
-    marginBottom: 20,
-  },
-
-  input: {
-    height: 58,
-    borderWidth: 1,
-    borderColor: BORDER_COLOR,
-    borderRadius: 4,
-    backgroundColor: SECONDARY_COLOR,
-    color: TEXT_PRIMARY,
-    fontSize: 16,
-    paddingHorizontal: 16,
-  },
-
-  continueButton: {
-    marginTop: 18,
-    backgroundColor: BTN_PRIMARY_BG,
-    height: 56,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  continueButtonText: {
-    color: BTN_PRIMARY_TEXT,
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
-  orText: {
-    textAlign: "center",
-    color: TEXT_PRIMARY,
-    fontSize: 16,
-    fontWeight: "700",
-    marginTop: 30,
-    marginBottom: 20,
-  },
-
-  socialButton: {
-    height: 56,
-    borderWidth: 1,
-    borderColor: BORDER_COLOR,
-    borderRadius: 30,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-
-  socialIcon: {
-    position: "absolute",
-    left: 20,
-  },
-
-  socialText: {
-    flex: 1,
-    textAlign: "center",
-    color: TEXT_PRIMARY,
-    fontSize: 16,
-    fontWeight: "700",
-  },
-
-  footer: {
-    alignItems: "center",
-    paddingBottom: 80,
-  },
-
-  footerText: {
-    color: TEXT_SECONDARY,
-    fontSize: 15,
-  },
-
-  footerLink: {
-    color: TEXT_PRIMARY,
-    fontSize: 18,
-    fontWeight: "700",
-    marginTop: 10,
-  },
-
-  Message: {
-    marginTop: 3,
-    color: "red",
-  },
-});
