@@ -22,80 +22,63 @@ export default function WelcomeScreen() {
       style={{ backgroundColor: PRIMARY_COLOR }}
     >
       <View
-        className="mb-5"
-        style={{
-          padding: 30,
-          borderRadius: RADIUS_FULL,
-        }}
+        className="mb-5 p-[30px]"
+        style={{ borderRadius: RADIUS_FULL }}
       >
         <FontAwesome5 name="spotify" size={80} color={LOGO_COLOR} />
       </View>
 
       <Text
-        style={{
-          color: TEXT_PRIMARY,
-          fontSize: 36,
-          fontWeight: "bold",
-        }}
+        className="text-[36px] font-bold"
+        style={{ color: TEXT_PRIMARY }}
       >
         Millions of Songs.
       </Text>
 
       <Text
-        style={{
-          color: TEXT_PRIMARY,
-          fontSize: 36,
-          fontWeight: "bold",
-        }}
+        className="text-[36px] font-bold"
+        style={{ color: TEXT_PRIMARY }}
       >
         Free on Spotify.
       </Text>
 
       <View className="w-4/5 pt-24 mt-8">
         <TouchableOpacity
+          className="items-center mb-[10px]"
           style={{
             backgroundColor: BTN_PRIMARY_BG,
             paddingVertical: 14,
             paddingHorizontal: 20,
             borderRadius: RADIUS_FULL,
-            marginBottom: 10,
-            alignItems: "center",
           }}
           onPress={() => {
             navigation.navigate("SignInScreen");
           }}
         >
           <Text
-            style={{
-              color: BTN_PRIMARY_TEXT,
-              fontSize: 16,
-              fontWeight: "bold",
-            }}
+            className="text-[16px] font-bold"
+            style={{ color: BTN_PRIMARY_TEXT }}
           >
             Sign up for Free
           </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
+          className="items-center mb-[10px]"
           style={{
             paddingVertical: 14,
             paddingHorizontal: 20,
             borderRadius: RADIUS_FULL,
             borderColor: BORDER_COLOR,
             borderWidth: 1,
-            marginBottom: 10,
-            alignItems: "center",
           }}
           onPress={() => {
             navigation.navigate("LoginScreen");
           }}
         >
           <Text
-            style={{
-              color: TEXT_SECONDARY,
-              fontSize: 16,
-              fontWeight: "bold",
-            }}
+            className="text-[16px] font-bold"
+            style={{ color: TEXT_SECONDARY }}
           >
             Log in
           </Text>
