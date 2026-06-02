@@ -4,6 +4,7 @@ import { PRIMARY_COLOR } from "../theme/theme";
 import BottomBar from "../components/BottomBar";
 import TopBar from "../components/HomeComponents/TopBar";
 import Playlists from "../components/HomeComponents/Playlists";
+import Albums from "../components/HomeComponents/Albums";
 
 export default function HomeScreen() {
   return (
@@ -14,6 +15,7 @@ export default function HomeScreen() {
       {/* Content */}
       <View className="flex-1">
         <Playlists />
+        <Albums />
       </View>
 
       <BottomBar />

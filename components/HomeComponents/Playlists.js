@@ -28,7 +28,7 @@ const PlaylistCards = [
 
 const Playlists = () => {
   return (
-    <View className="mt-20 px-5 flex-row flex-wrap justify-between">
+    <View className="mt-10 px-5 flex-row flex-wrap justify-between">
       {PlaylistCards.map((item, index) => (
         <View
           key={index}
