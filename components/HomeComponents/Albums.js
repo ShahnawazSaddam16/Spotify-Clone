@@ -57,13 +57,12 @@ export default function AlbumsSection() {
               className="w-[120px] h-[120px] rounded-xl block m-auto"
             />
 
-            <View className="ml-4">
-              <Text className="text-white text-[18px] font-bold">
-                {item.name}
-              </Text>
-
                 <Text className="text-[#B3B3B3] text-[12px] mt-1">
                 {item.type}
+              </Text>
+
+              <Text className="text-white text-[18px] font-bold">
+                {item.name}
               </Text>
 
               <Text className="text-[#B3B3B3] text-[14px] mt-1 w-[100px] line-clamp-1">
@@ -72,7 +71,6 @@ export default function AlbumsSection() {
 
             </View>
             </View>
-          </View>
         ))}
       </ScrollView>
     </View>
