@@ -5,6 +5,7 @@ import BottomBar from "../components/BottomBar";
 import TopBar from "../components/HomeComponents/TopBar";
 import Playlists from "../components/HomeComponents/Playlists";
 import Albums from "../components/HomeComponents/Albums";
+import MadeForYou from "../components/HomeComponents/MadeForYou";
 
 export default function HomeScreen() {
   return (
@@ -18,6 +19,7 @@ export default function HomeScreen() {
       >
         <Playlists />
         <Albums />
+        <MadeForYou />
       </ScrollView>
 
       <BottomBar />
