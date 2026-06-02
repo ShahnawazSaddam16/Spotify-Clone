@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, ScrollView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { PRIMARY_COLOR } from "../theme/theme";
 import BottomBar from "../components/BottomBar";
@@ -9,14 +9,16 @@ import Albums from "../components/HomeComponents/Albums";
 export default function HomeScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: PRIMARY_COLOR }}>
-      
       <TopBar />
 
-      {/* Content */}
-      <View className="flex-1">
+      <ScrollView
+        className="flex-1"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 120 }}
+      >
         <Playlists />
         <Albums />
-      </View>
+      </ScrollView>
 
       <BottomBar />
 
