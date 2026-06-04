@@ -21,7 +21,7 @@ export default function TopBar() {
           </TouchableOpacity>
         </View>
 
-        <View className="flex-row items-center mt-5 w-full bg-white rounded-xl px-3 h-18">
+        <View className="flex-row items-center mt-8 w-full bg-white rounded-xl px-3 h-18">
           <Ionicons name="search" size={20} color="#000000" />
           <TextInput
             placeholder="What do you want to listen to?"

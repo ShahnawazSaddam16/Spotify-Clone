@@ -3,6 +3,7 @@ import { View, Text, StatusBar } from "react-native";
 import { PRIMARY_COLOR } from "../theme/theme";
 import BottomBar from "../components/BottomBar";
 import TopBar from "../components/SearchComponents/TopBar";
+import DiscoverNew from "../components/SearchComponents/DiscoverNew";
 
 export default function SearchScreen() {
   return (
@@ -13,10 +14,8 @@ export default function SearchScreen() {
         <TopBar/>
       <StatusBar barStyle="light-content" />
 
-      <View className="flex-1 items-center justify-center">
-        <Text className="text-white text-xl">
-          Search Screen
-        </Text>
+      <View className="flex-1">
+        <DiscoverNew />
       </View>
 
       <BottomBar />
