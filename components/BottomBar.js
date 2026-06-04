@@ -23,6 +23,10 @@ export default function BottomBar() {
     { name: "Create", label: "Create", icon: "plus", type: "feather" },
   ];
 
+  const handlePress = (screenName) => {
+    navigation.navigate(screenName);
+  };
+
   return (
     <View
       className="flex-row items-center justify-around h-[110px] border-t pb-3 pt-2"
@@ -39,7 +43,7 @@ export default function BottomBar() {
           <TouchableOpacity
             key={tab.name}
             className="items-center justify-center"
-            onPress={() => navigation.navigate(tab.name)}
+            onPress={() => handlePress(tab.name)}
           >
             {tab.type === "ion" ? (
               <Ionicons
