@@ -7,9 +7,7 @@ export default function TopBar() {
       <View className="flex justify-center items-start mt-10 mx-5">
         <View className="flex-row items-center justify-between w-full">
           <View className="flex-row items-center gap-6">
-            <TouchableOpacity
-              className="bg-blue-500 items-center justify-center w-10 h-10 rounded-full"
-            >
+            <TouchableOpacity className="bg-blue-500 items-center justify-center w-10 h-10 rounded-full">
               <Text className="text-black text-[18px] font-extrabold">S</Text>
             </TouchableOpacity>
 
@@ -21,11 +19,16 @@ export default function TopBar() {
           <TouchableOpacity className="items-center justify-center">
             <Ionicons name="camera-outline" size={28} color="#FFFFFF" />
           </TouchableOpacity>
-
         </View>
-        <TextInput 
-        className="border-2 border-gray-400 justify-center items-center"
-        />
+
+        <View className="flex-row items-center mt-5 w-full bg-white rounded-xl px-3 h-18">
+          <Ionicons name="search" size={20} color="#000000" />
+          <TextInput
+            placeholder="What do you want to listen to?"
+            placeholderTextColor="#888"
+            className="flex-1 ml-2 text-black"
+          />
+        </View>
       </View>
     </>
   );
