@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StatusBar } from "react-native";
+import { View, Text, StatusBar,  ScrollView } from "react-native";
 import { PRIMARY_COLOR } from "../theme/theme";
 import BottomBar from "../components/BottomBar";
 import TopBar from "../components/SearchComponents/TopBar";
@@ -15,10 +15,16 @@ export default function SearchScreen() {
         <TopBar/>
       <StatusBar barStyle="light-content" />
 
+         <ScrollView
+        className="flex-1"
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 120 }}
+      >
       <View className="flex-1">
         <DiscoverNew />
         <BrowseAll />
       </View>
+      </ScrollView>
 
       <BottomBar />
     </View>
