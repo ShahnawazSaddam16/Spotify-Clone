@@ -52,16 +52,10 @@ export default function BottomBar() {
           />
 
           <View className="ml-3 flex-1">
-            <Text
-              className="text-white text-base font-bold"
-              numberOfLines={1}
-            >
+            <Text className="text-white text-base font-bold" numberOfLines={1}>
               Nasha
             </Text>
-            <Text
-              className="text-white opacity-80 text-sm"
-              numberOfLines={1}
-            >
+            <Text className="text-white opacity-80 text-sm" numberOfLines={1}>
               Talwiinder
             </Text>
           </View>
@@ -97,7 +91,7 @@ export default function BottomBar() {
             <TouchableOpacity
               key={tab.name}
               className="items-center justify-center"
-              onPress={() => handlePress(tab.name)}
+              onPress={() => navigation.navigate(tab.name)}
             >
               {tab.type === "ion" ? (
                 <Ionicons

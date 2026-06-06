@@ -15,7 +15,7 @@ export default function SearchScreen() {
         <TopBar/>
       <StatusBar barStyle="light-content" />
 
-         <ScrollView
+        <ScrollView
         className="flex-1"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 120 }}

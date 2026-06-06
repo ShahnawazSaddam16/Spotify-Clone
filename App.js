@@ -10,6 +10,7 @@ import SignInScreen from './screens/Auth/SignInScreen';
 import LoginScreen from './screens/Auth/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
+import LibraryScreen from './screens/LibraryScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
           <Stack.Screen name="LoginScreen"component={LoginScreen} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="SearchScreen" component={SearchScreen} />
+          <Stack.Screen name="LibraryScreen" component={LibraryScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
