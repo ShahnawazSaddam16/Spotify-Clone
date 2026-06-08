@@ -28,10 +28,6 @@ export default function BottomBar() {
     { name: "Create", label: "Create", icon: "plus", type: "feather" },
   ];
 
-  const handlePress = (screenName) => {
-    navigation.navigate(screenName);
-  };
-
   return (
     <View
       style={{
@@ -42,7 +38,10 @@ export default function BottomBar() {
       <View
         className="mx-3 mb-2 rounded-xl px-3 py-2 flex-row items-center justify-between"
         style={{
-          backgroundColor: "rgba(29, 185, 84, 0.85)",
+          backgroundColor: "rgba(29, 185, 84, 0.25)",
+          borderWidth: 1,
+          borderColor: "rgba(255,255,255,0.15)",
+          backdropFilter: "blur(20px)",
         }}
       >
         <View className="flex-row items-center flex-1">
