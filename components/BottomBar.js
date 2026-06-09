@@ -13,6 +13,7 @@ import {
 
 export default function BottomBar() {
   const [playerVisible, setPlayerVisible] = useState(false);
+  const [createVisible, setCreateVisible] = useState(false);
   const navigation = useNavigation();
   const route = useRoute();
   const insets = useSafeAreaInsets();
@@ -27,6 +28,13 @@ export default function BottomBar() {
       type: "material",
     },
     { name: "Create", label: "Create", icon: "plus", type: "feather" },
+  ];
+
+  const createOptions = [
+    { icon: "musical-notes", label: "Playlist", description: "Build a playlist" },
+    { icon: "people", label: "Blend", description: "Blend with friends" },
+    { icon: "radio", label: "Radio Station", description: "Create a radio station" },
+    { icon: "folder-open", label: "Playlist folder", description: "Organize your playlists" },
   ];
 
   return (
@@ -90,6 +98,40 @@ export default function BottomBar() {
         </View>
       </Modal>
 
+      {/* Spotify-style Create popup */}
+      <Modal
+        visible={createVisible}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setCreateVisible(false)}
+      >
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={() => setCreateVisible(false)}
+          style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "flex-end" }}
+        >
+          <TouchableOpacity activeOpacity={1} style={{ backgroundColor: "#121212", borderTopLeftRadius: 16, borderTopRightRadius: 16, paddingTop: 20, paddingHorizontal: 20, paddingBottom: insets.bottom + 20 }}>
+            <Text style={{ color: "white", fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>Create</Text>
+
+            {createOptions.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => setCreateVisible(false)}
+                style={{ flexDirection: "row", alignItems: "center", paddingVertical: 14, borderBottomWidth: index < createOptions.length - 1 ? 0.5 : 0, borderBottomColor: "rgba(255,255,255,0.1)" }}
+              >
+                <View style={{ width: 48, height: 48, borderRadius: 8, backgroundColor: "#282828", justifyContent: "center", alignItems: "center", marginRight: 16 }}>
+                  <Ionicons name={option.icon} size={24} color="white" />
+                </View>
+                <View>
+                  <Text style={{ color: "white", fontSize: 16, fontWeight: "600" }}>{option.label}</Text>
+                  <Text style={{ color: "#b3b3b3", fontSize: 13, marginTop: 2 }}>{option.description}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </Modal>
+
       <View style={{ backgroundColor: PRIMARY_COLOR, borderTopColor: BORDER_COLOR }}>
         <TouchableOpacity
           activeOpacity={0.9}
@@ -123,10 +165,28 @@ export default function BottomBar() {
 
         <View className="flex-row items-center justify-around h-[95px] border-t pb-3 pt-2" style={{ backgroundColor: PRIMARY_COLOR, borderTopColor: BORDER_COLOR, paddingBottom: insets.bottom }}>
           {tabs.map((tab) => {
+            const isCreate = tab.name === "Create";
             const active = route.name === tab.name;
+
             return (
-              <TouchableOpacity key={tab.name} className="items-center justify-center" onPress={() => navigation.navigate(tab.name)}>
-                {tab.type === "ion" ? (
+              <TouchableOpacity
+                key={tab.name}
+                className="items-center justify-center"
+                onPress={() => {
+                  if (isCreate) {
+                    setCreateVisible(!createVisible);
+                  } else {
+                    navigation.navigate(tab.name);
+                  }
+                }}
+              >
+                {isCreate ? (
+                  <Feather
+                    name={createVisible ? "x" : "plus"}
+                    size={24}
+                    color={createVisible ? TEXT_PRIMARY : TEXT_SECONDARY}
+                  />
+                ) : tab.type === "ion" ? (
                   <Ionicons name={tab.icon} size={24} color={active ? TEXT_PRIMARY : TEXT_SECONDARY} />
                 ) : tab.type === "material" ? (
                   <MaterialIcons name={tab.icon} size={24} color={active ? TEXT_PRIMARY : TEXT_SECONDARY} />
@@ -134,7 +194,9 @@ export default function BottomBar() {
                   <Feather name={tab.icon} size={24} color={active ? TEXT_PRIMARY : TEXT_SECONDARY} />
                 )}
 
-                <Text className="text-[11px] mt-1" style={{ color: active ? TEXT_PRIMARY : TEXT_SECONDARY }}>{tab.label}</Text>
+                <Text className="text-[11px] mt-1" style={{ color: isCreate && createVisible ? TEXT_PRIMARY : active ? TEXT_PRIMARY : TEXT_SECONDARY }}>
+                  {tab.label}
+                </Text>
               </TouchableOpacity>
             );
           })}
