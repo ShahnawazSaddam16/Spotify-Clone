@@ -20,11 +20,17 @@
         "foregroundImage": "./assets/favicon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.shahnawaz_butt15.SpotifyClone"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6a8589e1-1ec4-4711-8c2f-a62dc1feefa2"
+      }
     }
   }
 }
